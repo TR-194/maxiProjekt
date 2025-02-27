@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/MaxiProjekt/src-gen" creationIcons="false" editDirectory="/MaxiProjekt.edit/src-gen"
+    editorDirectory="/MaxiProjekt.editor/src-gen" modelPluginID="MaxiProjekt" modelName="MaxiProjekt"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="22.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>maxiProjekt.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="MaxiProjekt" disposableProviderFactory="true" ecorePackage="maxiProjekt.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="maxiProjekt.ecore#//Kategorie">
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Kategorie/Parkett"/>
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Kategorie/Loge"/>
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Kategorie/LogeMitService"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="maxiProjekt.ecore#//Status">
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Status/Frei"/>
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Status/Reserviert"/>
+      <genEnumLiterals ecoreEnumLiteral="maxiProjekt.ecore#//Status/Gebucht"/>
+    </genEnums>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Kinosaal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Kinosaal/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Kinosaal/freigegeben"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Kinosaal/sitzreihe"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Kinosaal/freigeben"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Sitzreihe">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Sitzreihe/reihenNr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Sitzreihe/kategorie"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Sitzreihe/sitzplatz"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Sitzplatz">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Sitzplatz/platzNr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Sitzplatz/Status"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Sitzplatz/istFrei"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Reservierung">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Reservierung/ablaufDatum"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Reservierung/umwandeln"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Reservierung/sitzplatz"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Reservierung/stornieren"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Reservierung/inBuchungUmwandeln"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Reservierung/istGültig"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Buchung">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Buchung/sitzplatz"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Buchung/bezahlen"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Aufführung">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Aufführung/datum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Aufführung/uhrzeit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Aufführung/kinosaal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Aufführung/preismodell"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Aufführung/statistik"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Aufführung/film"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Aufführung/istVerfügbar"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Statistik">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Statistik/einnahmen"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Statistik/berechneEinnahmenProAufführung">
+        <genParameters ecoreParameter="maxiProjekt.ecore#//Statistik/berechneEinnahmenProAufführung/aufführung"/>
+      </genOperations>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Statistik/berechneEinnahmenProFilm">
+        <genParameters ecoreParameter="maxiProjekt.ecore#//Statistik/berechneEinnahmenProFilm/film"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Film">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Film/titel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Film/altersbeschränkung"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Film/dauer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Film/statistik"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Film/aufführung"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Preismodell">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Preismodell/parkettPreis"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Preismodell/logePreis"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute maxiProjekt.ecore#//Preismodell/logeMitServicePreis"/>
+    </genClasses>
+    <genClasses ecoreClass="maxiProjekt.ecore#//Admin">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Admin/verwaltetFilm"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Admin/verwaltetKinosaal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference maxiProjekt.ecore#//Admin/verwaltetAufführung"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Admin/bearbeiteFilm"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Admin/löscheFilm"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Admin/bearbeiteAufführung"/>
+      <genOperations ecoreOperation="maxiProjekt.ecore#//Admin/löscheAufführung"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

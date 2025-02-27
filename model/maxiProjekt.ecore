@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="maxiProjekt" nsURI="http://www.example.org/maxiProjekt" nsPrefix="maxiProjekt">
+  <eClassifiers xsi:type="ecore:EClass" name="Kinosaal">
+    <eOperations name="freigeben"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freigegeben" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sitzreihe" lowerBound="1"
+        upperBound="-1" eType="#//Sitzreihe"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sitzreihe">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reihenNr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kategorie" eType="#//Kategorie"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sitzplatz" lowerBound="1"
+        upperBound="-1" eType="#//Sitzplatz"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Kategorie">
+    <eLiterals name="Parkett"/>
+    <eLiterals name="Loge" value="1"/>
+    <eLiterals name="LogeMitService" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Status">
+    <eLiterals name="Frei"/>
+    <eLiterals name="Reserviert" value="1"/>
+    <eLiterals name="Gebucht" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sitzplatz">
+    <eOperations name="istFrei" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="platzNr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Status" eType="#//Status"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reservierung">
+    <eOperations name="stornieren"/>
+    <eOperations name="inBuchungUmwandeln" eType="#//Buchung"/>
+    <eOperations name="istGültig" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ablaufDatum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="umwandeln" lowerBound="1"
+        eType="#//Buchung"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sitzplatz" lowerBound="1"
+        upperBound="-1" eType="#//Sitzplatz"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Buchung">
+    <eOperations name="bezahlen"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sitzplatz" lowerBound="1"
+        upperBound="-1" eType="#//Sitzplatz"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aufführung">
+    <eOperations name="istVerfügbar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="datum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uhrzeit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kinosaal" lowerBound="1"
+        eType="#//Kinosaal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preismodell" lowerBound="1"
+        eType="#//Preismodell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statistik" lowerBound="1"
+        eType="#//Statistik"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="film" lowerBound="1" eType="#//Film"
+        eOpposite="#//Film/aufführung"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statistik">
+    <eOperations name="berechneEinnahmenProAufführung">
+      <eParameters name="aufführung" eType="#//Aufführung"/>
+    </eOperations>
+    <eOperations name="berechneEinnahmenProFilm">
+      <eParameters name="film" eType="#//Film"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="einnahmen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Film">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="titel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="altersbeschränkung" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dauer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statistik" lowerBound="1"
+        eType="#//Statistik"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aufführung" lowerBound="1"
+        upperBound="-1" eType="#//Aufführung" eOpposite="#//Aufführung/film"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Preismodell">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parkettPreis" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logePreis" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logeMitServicePreis" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Admin">
+    <eOperations name="bearbeiteFilm"/>
+    <eOperations name="löscheFilm"/>
+    <eOperations name="bearbeiteAufführung"/>
+    <eOperations name="löscheAufführung"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verwaltetFilm" lowerBound="1"
+        upperBound="-1" eType="#//Film"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verwaltetKinosaal" lowerBound="1"
+        upperBound="-1" eType="#//Kinosaal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="verwaltetAufführung" lowerBound="1"
+        upperBound="-1" eType="#//Aufführung"/>
+  </eClassifiers>
+</ecore:EPackage>
